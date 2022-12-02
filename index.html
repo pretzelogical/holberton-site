@@ -14,6 +14,7 @@
             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             background-color: black;
             color: white;
+            cursor: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8' standalone='no'%3F%3E%3C!-- Created with Inkscape (http://www.inkscape.org/) --%3E%3Csvg width='32' height='32' viewBox='0 0 32 32' version='1.1' id='svg5' inkscape:version='1.2.1 (9c6d41e410  2022-07-14  custom)' sodipodi:docname='circ.svg' xmlns:inkscape='http://www.inkscape.org/namespaces/inkscape' xmlns:sodipodi='http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd' xmlns='http://www.w3.org/2000/svg' xmlns:svg='http://www.w3.org/2000/svg'%3E%3Csodipodi:namedview id='namedview7' pagecolor='%23ffffff' bordercolor='%23000000' borderopacity='0.25' inkscape:showpageshadow='2' inkscape:pageopacity='0.0' inkscape:pagecheckerboard='0' inkscape:deskcolor='%23d1d1d1' inkscape:document-units='px' showgrid='false' inkscape:zoom='11.534679' inkscape:cx='2.6442001' inkscape:cy='15.951896' inkscape:window-width='1366' inkscape:window-height='703' inkscape:window-x='0' inkscape:window-y='0' inkscape:window-maximized='1' inkscape:current-layer='layer1' /%3E%3Cdefs id='defs2' /%3E%3Cg inkscape:label='Layer 1' inkscape:groupmode='layer' id='layer1'%3E%3Cellipse style='fill:%23000080%3Bstroke-width:0.985024' id='path111' ry='15.535058' rx='15.681213' cy='16' cx='16' /%3E%3Cpath style='fill:%23ffffff%3Bstroke-width:1.63809' id='path165' sodipodi:type='arc' sodipodi:cx='16' sodipodi:cy='16' sodipodi:rx='7.947969' sodipodi:ry='7.6140909' sodipodi:start='1.7362645' sodipodi:end='1.7322482' sodipodi:open='true' sodipodi:arc-type='arc' d='m 14.690857 23.510093 a 7.947969 7.6140909 0 0 1 -6.5315779 -8.7567 7.947969 7.6140909 0 0 1 9.1341179 -6.2659891 7.947969 7.6140909 0 0 1 6.549921 8.7441171 7.947969 7.6140909 0 0 1 -9.120965 6.283548' /%3E%3C/g%3E%3C/svg%3E");
             padding: auto;
             margin: 0;
         }
@@ -179,16 +180,20 @@
         </ul>
     </div>
     <div class="info">
-        <h1>Welcome to my website!</h1>
+        <h1>Holberton Website</h1>
         <p class="heroText">
             The main reason I want to go with Holberton is the fact i get to have a more focused way to learn
             programming
             and computer science skills.
-            Right now I am working with mostly python and JavaScript but I would like to expand my knowledge
-            so I can use it to build better programs and gain a deeper understanding of technology and computers.
+            Right now I am working with mostly Python and JavaScript but I would like to expand my knowledge
+            so I can use it to build better programs and gain a deeper understanding of programming and computers.
+            The reason I like computers so much is that they are everywhere and are relied upon daily by normal people
+            and large
+            instituions alike.
+            I have some samples of Javascript below.
             <button class="bgButton">Random background color</button>
         </p>
-        <p class="timesVisited">You have timesVisited this page $ times</p>
+        <p class="timesVisited">You have visited this page $ times</p>
         <svg class="blahaj" width="2000" height="2000" viewBox="0 0 529.16665 529.16666" version="1.1" id="svg256"
             xml:space="preserve" inkscape:version="1.2.1 (9c6d41e410, 2022-07-14, custom)" sodipodi:docname="blahaj.svg"
             xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
@@ -13735,32 +13740,49 @@ CgFAKAUAoBQCgFAKAUAoBQCgFAKAUAoBQCgP/9k=
         let rgb = `rgb(${colors.red}, ${colors.green}, ${colors.blue})`;
         document.body.style.backgroundColor = rgb;
     };
-    // Visited cookies
+    // Visited cookies (this is my first time working with cookies)
 
     const evalTimesVisitedCookies = () => {
-        if (document.cookie == null) {
-            console.log("Cookie created")
-            document.cookie = "timesVisited=1; expires=Thu, 2 Dec 2023 12:00:00 UTC"
+        if (document.cookie == "timesVisited=0" || document.cookie == "null") {
+            document.cookie = "timesVisited=0; expires=Thu, 2 Dec 2023 12:00:00 UTC";
         }
-        // timesVisited = 
-        timesVisited = document.cookie.split(";")/*.slice(13)*/
-        console.log(typeof (timesVisited), typeof (document.cookie))
-        console.log(timesVisited, document.cookie)
-        timesVisited += 1
-        document.cookie = `timesVisited=${toString(timesVisited)}; expires=Thu, 2 Dec 2023 12:00:00 UTC`
-        console.log(timesVisited, document.cookie)
-    }
+        // Cool JavaScript feature where if I use let it is NaN but if I dont It's fine. Thank you JavaScript.
+        timesVisited = parseInt(document.cookie.match(/\d+/g));
+        timesVisited += 1;
+        document.cookie = `timesVisited=${timesVisited.toString()}; expires=Thu, 2 Dec 2023 12:00:00 UTC`;
+        return timesVisited;
+    };
+
+    const resetTimesVisitedCookies = () => {
+        document.cookie = "timesVisited=0; expires=Thu, 2 Dec 2023 12:00:00 UTC";
+    };
 
     const deleteTimesVisitedCookies = () => {
-        document.cookie = "timesVisited=; expires=Thu, 2 Dec 2000 12:00:00 UTC"
-    }
+        document.cookie = "timesVisited=0";
+    };
+
+    const updateTimesVisitedCookies = () => {
+        times = evalTimesVisitedCookies();
+        if (times == 1) {
+            displayTimesVisitedCookies(`You have visited this page ${times} time`);
+        } else {
+            displayTimesVisitedCookies(`You have visited this page ${times} times`);
+        }
+    };
+
+    const displayTimesVisitedCookies = (text) => {
+        const timesVisitedDisplay = document.querySelector(".timesVisited");
+        timesVisitedDisplay.textContent = text;
+    };
 
     const init = () => {
-        //Runs at start and adds event listener to button
+        //Runs at start, increments times visited cookie and adds event listener to button.
+        updateTimesVisitedCookies();
         const changeButton = document.querySelector(".bgButton");
         changeButton.addEventListener("click", makeBackgroundRandomColor);
     };
     init();
+
 </script>
 
 
